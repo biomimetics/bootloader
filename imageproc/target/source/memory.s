@@ -74,7 +74,7 @@ _ReadLatch: ;W0=TBLPAG,W1=Wn - data in W1:W0
 ;***************************************************************
 _ResetDevice:
 	
-  goto 0xc02
+  goto 0x2002
 
 	return
 

@@ -1,19 +1,19 @@
 
 /**********************************************************************
-* ?2006 Microchip Technology Inc.
+* © 2006 Microchip Technology Inc.
 *
 * FileName:        traps.c
 * Dependencies:    p33FJ256GP506.h
 * Processor:       dsPIC33F
-* Compiler:        MPLAB?C30 v2.01 or higher
+* Compiler:        MPLAB® C30 v2.01 or higher
 *
 * SOFTWARE LICENSE AGREEMENT:
-* Microchip Technology Inc. (“Microchip? licenses this software to you
-* solely for use with Microchip dsPIC?digital signal controller
+* Microchip Technology Inc. (“Microchip”) licenses this software to you
+* solely for use with Microchip dsPIC® digital signal controller
 * products. The software is owned by Microchip and is protected under
 * applicable copyright laws.  All rights reserved.
 *
-* SOFTWARE IS PROVIDED “AS IS.? MICROCHIP EXPRESSLY DISCLAIMS ANY
+* SOFTWARE IS PROVIDED “AS IS.”  MICROCHIP EXPRESSLY DISCLAIMS ANY
 * WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT
 * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
 * PARTICULAR PURPOSE, OR NON-INFRINGEMENT. IN NO EVENT SHALL MICROCHIP
@@ -69,12 +69,27 @@ void __attribute__((__interrupt__, no_auto_psv)) _AltDMACError(void);
 void __attribute__((__interrupt__, no_auto_psv)) _OscillatorFail(void)
 {
         INTCON1bits.OSCFAIL = 0;        //Clear the trap flag
-        while (1);
+        while(1) {
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(1000);
+        }
 }
 
 void __attribute__((__interrupt__, no_auto_psv)) _AddressError(void)
 {
         INTCON1bits.ADDRERR = 0;        //Clear the trap flags
+        while(1) {
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(200);
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(1000);
+        }
         while(1) {
             asm volatile("btg   PORTF, #1");
             for (k=0; k<100; k++) { delay_us(500); }   // Waste approximatelly 50ms
@@ -84,13 +99,43 @@ void __attribute__((__interrupt__, no_auto_psv)) _AddressError(void)
 void __attribute__((__interrupt__, no_auto_psv)) _StackError(void)
 {
         INTCON1bits.STKERR = 0;         //Clear the trap flag
-        while (1);
+        while(1) {
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(200);
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(200);
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(1000);
+        }
 }
 
 void __attribute__((__interrupt__, no_auto_psv)) _MathError(void)
 {
         INTCON1bits.MATHERR = 0;        //Clear the trap flag
-        while (1);
+        while(1) {
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(200);
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(200);
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(200);
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(1000);
+        }
 }
 
 
@@ -100,7 +145,28 @@ void __attribute__((__interrupt__, no_auto_psv)) _DMACError(void)
 		DMACS0 = 0;
 
         INTCON1bits.DMACERR = 0;        //Clear the trap flag
-        while (1);
+        while(1) {
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(200);
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(200);
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(200);
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(200);
+            LED_1 = ON;
+            delay_ms(200);
+            LED_1 = OFF;
+            delay_ms(1000);
+        }
 }
 
 

@@ -1,35 +1,35 @@
 /*
-** Linker script for PIC33FJ128MC706
+** Linker script for PIC33FJ128MC706A
 */
 
-OUTPUT_ARCH("33FJ128MC706")
-EXTERN(__resetPRI)
-EXTERN(__resetALT)
+OUTPUT_ARCH("33FJ128MC706A")
+CRT0_STARTUP(crt0_standard.o)
+CRT1_STARTUP(crt1_standard.o)
 
-OPTIONAL(-lp33FJ128MC706)
+OPTIONAL(-lp33FJ128MC706A)
 
 /*
 ** Memory Regions
 */
 MEMORY
 {
-  data  (a!xr) : ORIGIN = 0x800,         LENGTH = 0x4000
-  reset        : ORIGIN = 0x0,           LENGTH = 0x4
-  ivt          : ORIGIN = 0x4,           LENGTH = 0xFC
-  aivt         : ORIGIN = 0x104,         LENGTH = 0xFC
-  program (xr) : ORIGIN = 0xC00,         LENGTH = 0x14A00
-  FBS          : ORIGIN = 0xF80000,      LENGTH = 0x2
-  FSS          : ORIGIN = 0xF80002,      LENGTH = 0x2
-  FGS          : ORIGIN = 0xF80004,      LENGTH = 0x2
-  FOSCSEL      : ORIGIN = 0xF80006,      LENGTH = 0x2
-  FOSC         : ORIGIN = 0xF80008,      LENGTH = 0x2
-  FWDT         : ORIGIN = 0xF8000A,      LENGTH = 0x2
-  FPOR         : ORIGIN = 0xF8000C,      LENGTH = 0x2
-  FICD         : ORIGIN = 0xF8000E,      LENGTH = 0x2
-  FUID0        : ORIGIN = 0xF80010,      LENGTH = 0x2
-  FUID1        : ORIGIN = 0xF80012,      LENGTH = 0x2
-  FUID2        : ORIGIN = 0xF80014,      LENGTH = 0x2
-  FUID3        : ORIGIN = 0xF80016,      LENGTH = 0x2
+  data  (a!xr)   : ORIGIN = 0x800,         LENGTH = 0x4000
+  reset          : ORIGIN = 0x0,           LENGTH = 0x4
+  ivt            : ORIGIN = 0x4,           LENGTH = 0xFC
+  aivt           : ORIGIN = 0x104,         LENGTH = 0xFC
+  program (xr)   : ORIGIN = 0x2000,        LENGTH = 0x13600
+  FBS            : ORIGIN = 0xF80000,      LENGTH = 0x2
+  FSS            : ORIGIN = 0xF80002,      LENGTH = 0x2
+  FGS            : ORIGIN = 0xF80004,      LENGTH = 0x2
+  FOSCSEL        : ORIGIN = 0xF80006,      LENGTH = 0x2
+  FOSC           : ORIGIN = 0xF80008,      LENGTH = 0x2
+  FWDT           : ORIGIN = 0xF8000A,      LENGTH = 0x2
+  FPOR           : ORIGIN = 0xF8000C,      LENGTH = 0x2
+  FICD           : ORIGIN = 0xF8000E,      LENGTH = 0x2
+  FUID0          : ORIGIN = 0xF80010,      LENGTH = 0x2
+  FUID1          : ORIGIN = 0xF80012,      LENGTH = 0x2
+  FUID2          : ORIGIN = 0xF80014,      LENGTH = 0x2
+  FUID3          : ORIGIN = 0xF80016,      LENGTH = 0x2
 }
 
 __FBS = 0xF80000;
@@ -51,7 +51,7 @@ __DATA_BASE = 0x800;
 __YDATA_BASE = 0x2800;
 __DMA_BASE = 0x4000;
 __DMA_END = 0x47FF;
-__CODE_BASE = 0xC00;
+__CODE_BASE = 0x2000;
 
 
 /*
@@ -104,6 +104,47 @@ SECTIONS
         *(.libc) *(.libm) *(.libdsp);  /* keep together in this order */
         *(.lib*);
   } >program
+
+
+  /*
+  ** User-Defined Section in Program Memory
+  **
+  ** note: can specify an address using
+  **       the following syntax:
+  **
+  **       usercode 0x1234 :
+  **         {
+  **           *(usercode);
+  **         } >program
+  */
+  usercode :
+  {
+        *(usercode);
+  } >program
+
+
+  /*
+  ** User-Defined Constants in Program Memory
+  **
+  ** For PSV type sections, the Load Memory Address (LMA)
+  ** should be specified as follows:
+  **
+  **       userconst : AT(0x1234)
+  **         {
+  **           *(userconst);
+  **         } >program
+  **
+  ** Note that mapping PSV sections in linker scripts
+  ** is not generally recommended.
+  **
+  ** Because of page alignment restrictions, memory is
+  ** often used more efficiently when PSV sections
+  ** do not appear in the linker script.
+  **
+  ** For more information on memory allocation,
+  ** please refer to chapter 10, 'Linker Processing'
+  ** in the Assembler, Linker manual (DS51317).
+  */
 
 
   /*
@@ -355,7 +396,7 @@ SECTIONS
          ABSOLUTE(__DefaultInterrupt));
     LONG( DEFINED(__U2ErrInterrupt)    ? ABSOLUTE(__U2ErrInterrupt)    :
          ABSOLUTE(__DefaultInterrupt));
-    LONG( DEFINED(__Interrupt68)    ? ABSOLUTE(__Interrupt68)    :
+    LONG( DEFINED(__Interrupt67)    ? ABSOLUTE(__Interrupt67)    :
          ABSOLUTE(__DefaultInterrupt));
     LONG( DEFINED(__DMA6Interrupt)    ? ABSOLUTE(__DMA6Interrupt)    :
          ABSOLUTE(__DefaultInterrupt));
@@ -691,8 +732,8 @@ SECTIONS
     LONG( DEFINED(__AltU2ErrInterrupt)    ? ABSOLUTE(__AltU2ErrInterrupt)    :
          (DEFINED(__U2ErrInterrupt)       ? ABSOLUTE(__U2ErrInterrupt)       :
          ABSOLUTE(__DefaultInterrupt)));
-    LONG( DEFINED(__AltInterrupt68)    ? ABSOLUTE(__AltInterrupt68)    :
-         (DEFINED(__Interrupt68)       ? ABSOLUTE(__Interrupt68)       :
+    LONG( DEFINED(__AltInterrupt67)    ? ABSOLUTE(__AltInterrupt67)    :
+         (DEFINED(__Interrupt67)       ? ABSOLUTE(__Interrupt67)       :
          ABSOLUTE(__DefaultInterrupt)));
     LONG( DEFINED(__AltDMA6Interrupt)    ? ABSOLUTE(__AltDMA6Interrupt)    :
          (DEFINED(__DMA6Interrupt)       ? ABSOLUTE(__DMA6Interrupt)       :
