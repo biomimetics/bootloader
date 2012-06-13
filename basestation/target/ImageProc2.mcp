@@ -52,8 +52,8 @@ file_000=.\source\main.c
 file_001=.\source\bootloader.c
 file_002=Z:\Research\Source\embedded\imageproc-lib\delay.s
 file_003=Z:\Research\Source\embedded\imageproc-lib\init_default.c
-file_004=source\memory.s
-file_005=source\progmem.c
+file_004=source\progmem.c
+file_005=source\memory.s
 file_006=.\p33FJ128MC706A_Bootloader.gld
 [SUITE_INFO]
 suite_guid={479DDE59-4D56-455E-855E-FFF59A3DB57E}
