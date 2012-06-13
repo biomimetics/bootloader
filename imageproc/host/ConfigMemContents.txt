@@ -1,0 +1,16 @@
+Reading HexFile
+Configuration Codes - Address: 0xf80006, Data: fbff
+Configuration Codes - Address: 0xf80007, Data: 0000
+Configuration Codes - Address: 0xf80008, Data: bcff
+Configuration Codes - Address: 0xf80009, Data: 0000
+Configuration Codes - Address: 0xf8000a, Data: 7fff
+Configuration Codes - Address: 0xf8000b, Data: 0000
+
+Reading HexFile
+Configuration Codes - Address: 0xf80006, Data: fbff
+Configuration Codes - Address: 0xf80007, Data: 0000
+Configuration Codes - Address: 0xf80008, Data: bcff
+Configuration Codes - Address: 0xf80009, Data: 0000
+Configuration Codes - Address: 0xf8000a, Data: 7fff
+Configuration Codes - Address: 0xf8000b, Data: 0000
+
